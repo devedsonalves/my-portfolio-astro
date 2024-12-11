@@ -1,0 +1,47 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import GITHUB from "../../images/GITHUB.svg";
+import LINKEDIN from "../../images/LINKEDIN.svg";
+import { Image } from "astro:assets";
+
+const socialLinks = [
+  {
+    logo: GITHUB,
+    url: "https://github.com/devedsonalves",
+  },
+  {
+    logo: LINKEDIN,
+    url: "https://linkedin.com/in/edson4lves",
+  },
+];
+---
+
+<footer id="social-links" class="scroll-mt-12">
+  <Wrapper variant="base" class="py-8 2xl:py-16 border-t">
+    <div
+      class="flex flex-col justify-between gap-8 lg:flex-row lg:items-center"
+    >
+      <Text
+        tag="h2"
+        variant="textBase"
+        class="font-medium text-zinc-800 dark:text-zinc-200"
+      >
+        @devedsonalves
+      </Text>
+      <div class="flex gap-4 lg:justify-end">
+        {
+          socialLinks.map((link) => (
+            <a href={link.url} target="_blank" class="group">
+              <Image
+                alt="Social media"
+                src={link.logo}
+                class="w-6 text-black hover:text-zinc-700 duration-300 flex items-center dark:text-white dark:hover:text-zinc-300"
+              />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</footer>

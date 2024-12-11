@@ -1,0 +1,125 @@
+---
+import { Image } from "astro:assets";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import LIGHT from "../../images/LIGHT.png";
+
+const navItems = [
+  { name: "Sobre mim", href: "#about" },
+  { name: "Projetos", href: "#projects" },
+  { name: "Educação", href: "#education" },
+  { name: "Habilidades", href: "#skills" },
+  { name: "Redes sociais", href: "#social-links" },
+];
+
+const logoUrl = LIGHT;
+---
+
+<Wrapper variant="base" class="sticky top-4 z-10 max-w-3xl pb-8">
+  <div>
+    <nav
+      role="navigation"
+      aria-label="Main navigation"
+      class="flex items-center justify-between"
+    >
+      <button
+        id="menu-toggle"
+        class="sm:hidden py-2 px-3 rounded bg-zinc-200 dark:bg-zinc-800 dark:text-white hover:bg-zinc-100 hover:dark:bg-zinc-700"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <a href="#">
+        <Image
+          alt="logo-LIGHT-alves"
+          class="w-12 h-12 cursor-pointer rounded-full shadow-xl"
+          src={logoUrl}
+        />
+      </a>
+
+      <ul
+        class="hidden sm:flex items-center gap-3 text-xs font-medium"
+        role="list"
+        id="nav"
+      >
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="py-2 px-3 bg-zinc-200 dark:bg-zinc-800 dark:text-white rounded-full duration-300 hover:bg-zinc-100 hover:text-black dark:hover:bg-zinc-900 dark:hover:text-white nav-link"
+                data-target={item.href.substring(1)}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div
+        id="mobile-menu-container"
+        class="fixed inset-0 z-20 bg-black bg-opacity-50 hidden sm:hidden"
+      >
+        <ul
+          id="nav-menu"
+          class="fixed right-0 top-0 w-3/4 max-w-xs h-full bg-white dark:bg-zinc-900 shadow-lg transform translate-x-full transition-transform duration-300 flex flex-col gap-4 p-6"
+        >
+          <li class="self-end">
+            <button
+              id="close-menu"
+              class="py-2 px-3 rounded text-black dark:text-white bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-100 hover:dark:bg-zinc-700"
+              aria-label="Fechar menu"
+            >
+              ✕
+            </button>
+          </li>
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="block w-full py-2 px-2 text-md font-medium text-center text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 rounded hover:bg-zinc-200 hover:dark:bg-zinc-700"
+                  data-target={item.href.substring(1)}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </nav>
+  </div>
+</Wrapper>
+
+<script type="module">
+  const menuToggle = document.getElementById("menu-toggle");
+  const closeMenu = document.getElementById("close-menu");
+  const mobileMenuContainer = document.getElementById("mobile-menu-container");
+  const navMenu = document.getElementById("nav-menu");
+
+  const openMenu = () => {
+    mobileMenuContainer.classList.remove("hidden");
+    navMenu.classList.remove("translate-x-full");
+  };
+
+  const closeMobileMenu = () => {
+    navMenu.classList.add("translate-x-full");
+    setTimeout(() => mobileMenuContainer.classList.add("hidden"), 300);
+  };
+
+  menuToggle.addEventListener("click", openMenu);
+  closeMenu.addEventListener("click", closeMobileMenu);
+
+  document.querySelectorAll("navigate").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const target = e.target.getAttribute("data-target");
+      if (target) {
+        document.querySelector(target).scrollIntoView({ behavior: "smooth" });
+        closeMobileMenu();
+      }
+    });
+  });
+</script>

@@ -1,0 +1,86 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+
+const projects = [
+  {
+    name: "Farmácia Jatobá",
+    description:
+      "Website que consiste em uma farmácia online desenvolvido para a disciplina de 'Sistemas de Informação' da faculdade de Ciência da Computação. O projeto foi aprovado e apresentado no evento SERCOMP VI. Embora o Figma tenha sido recomendado, optei por utilizar tecnologias mais familiares para tornar o projeto mais intuitivo: Typescript, Next.js, Tailwind, Radix UI, Shadcn UI e Zustand",
+    launchYear: "2024",
+    link: "https://github.com/devedsonalves/jatoba-pharmacy",
+  },
+  {
+    name: "Registrador de Eventos",
+    description:
+      "Projeto pessoal que consiste em uma API com funcionalidades para criar, buscar, registrar-se em eventos, buscar participantes, consultar ingressos e realizar check-ins. Desenvolvido utilizando Typescript, Fastify, Zod, Prisma e PostgreSQL",
+    launchYear: "2024",
+    link: "https://github.com/devedsonalves/register-events-api",
+  },
+  {
+    name: "Autenticação Token JWT",
+    description:
+      "Projeto de estudo onde foi desenvolvida uma API simples com funcionalidades básicas de registrar usuários, realizar login e obter dados do usuário por meio de tokens JWT. Tecnologias utilizadas: Typescript, Express, Json Web Token, Bcrypt, Prisma e SQLite",
+    launchYear: "2024",
+    link: "https://github.com/devedsonalves/jwt-token-authentication",
+  },
+];
+---
+
+<section id="projects" class="scroll-mt-12">
+  <Wrapper variant="base" class="py-8 2xl:py-16 border-t">
+    <div class="w-full grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <Text
+          tag="h2"
+          variant="textMD"
+          class="font-medium text-zinc-800 dark:text-zinc-200"
+        >
+          Projetos
+        </Text>
+        <Text tag="p" variant="textSM" class="font-medium text-zinc-500">
+          Alguns projetos pessoais
+        </Text>
+      </div>
+      <div class="lg:col-span-2 divide-y gap-4 flex flex-col divide-black/5">
+        {
+          projects.map((product, index) => (
+            <a
+              href={product.link}
+              target="_blank"
+              class={`pb-4 group w-full animate-text`}
+              data-delay={index * 100}
+            >
+              <div class="flex items-center justify-between w-full">
+                <Text
+                  tag="h4"
+                  variant="textBase"
+                  class="text-zinc-80 group-hover:text-black dark:text-zinc-200 dark:group-hover:text-white duration-300 flex items-center"
+                >
+                  {product.name}
+                </Text>
+                <span class="ml-2 text-transparent group-hover:text-black group-hover:dark:text-white duration-300">
+                  →
+                </span>
+              </div>
+              <div class="text-zinc-500 text-pretty mt-2 dark:text-zinc-400">
+                <Text tag="p" variant="textSM">
+                  {product.description}
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-8">
+                  {product.launchYear}
+                </Text>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>
+<script type="module">
+  import { setupTextAnimation } from "../scripts/textReveal.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    setupTextAnimation();
+  });
+</script>
