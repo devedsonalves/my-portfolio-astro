@@ -1,17 +1,14 @@
 ---
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Text from "@/components/fundations/elements/Text.astro";
-import GITHUB from "../../images/GITHUB.svg";
-import LINKEDIN from "../../images/LINKEDIN.svg";
-import { Image } from "astro:assets";
 
 const socialLinks = [
   {
-    logo: GITHUB,
+    logo: "ph ph-github-logo",
     url: "https://github.com/devedsonalves",
   },
   {
-    logo: LINKEDIN,
+    logo: "ph ph-linkedin-logo",
     url: "https://linkedin.com/in/edson4lves",
   },
 ];
@@ -32,11 +29,12 @@ const socialLinks = [
       <div class="flex gap-4 lg:justify-end">
         {
           socialLinks.map((link) => (
-            <a href={link.url} target="_blank" class="group">
-              <Image
-                alt="Social media"
-                src={link.logo}
-                class="w-6 text-black hover:text-zinc-700 duration-300 flex items-center dark:text-white dark:hover:text-zinc-300"
+            <a href={link.url} target="_blank">
+              <i
+                class={
+                  link.logo +
+                  " text-black dark:text-white text-3xl duration-300 flex items-center"
+                }
               />
             </a>
           ))
